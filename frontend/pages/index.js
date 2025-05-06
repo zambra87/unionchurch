@@ -16,7 +16,6 @@ import sign from '../public/images/sign.png';
 import cover from '../public/images/cover.jpg';
 
 export default function Home({ dataServices, dataShepperdDeks }) {
-  console.log(dataServices.items);
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
     email,
