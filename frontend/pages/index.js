@@ -296,42 +296,6 @@ export default function Home({ dataServices, dataShepperdDeks }) {
           <CircleFinal className="absolute top-0 right-0 hidden md:block" />
         </div>
       </div>
-     /* <div className="px-8 sm:px-0">
-        <div className="container mx-auto text-center relative pb-20 md:pb-40 pt-10">
-          <div className="flex items-center justify-between py-16">
-            <p className="font-serif text-2xl md:text-3xl lg:text-4xl text-gray-800">
-              Últimos servicios
-            </p>
-            <a
-              target="_blank"
-              className="text-yellow-700 font-semibold border-b-4 flex items-center"
-              href="https://youtube.com/playlist?list=PLV_Ax0JpimXPtD-QDqcygoAwERU0rvU82"
-              rel="noreferrer"
-            >
-              Ver todos
-            </a>
-          </div>
-          <div className="flex flex-wrap flex-col sm:flex-row justify-between text-left pb-16 md:space-x-8">
-            {latestsServices}
-          </div>
-          <div className="flex items-center justify-between py-16">
-            <p className="font-serif text-2xl md:text-3xl lg:text-4xl text-gray-800">
-              Escritorio del pastor
-            </p>
-            <a
-              target="_blank"
-              className="text-yellow-700	font-semibold border-b-4 flex items-center"
-              href="https://youtube.com/playlist?list=PLV_Ax0JpimXPgTVH7fvCVC-2X0XQ6vorg"
-              rel="noreferrer"
-            >
-              Ver todos
-            </a>
-          </div>
-          <div className="flex flex-wrap flex-col lg:flex-row justify-between text-left lg:space-x-8">
-            {latestsShepperdDeks}
-          </div>
-        </div>
-      </div> */
       <div className="px-8 sm:px-0 pt-10 bg-pink-light">
         <div className="container mx-auto text-center pb-20 md:pb-40 pt-20 md:w-5/12">
           <p className="text-gray-300 text-9xl font-serif leading-3">“</p>
