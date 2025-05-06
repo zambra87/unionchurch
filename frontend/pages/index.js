@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Image from 'next/image';
-import { Layout, Header, shimmer, toBase64 } from '../components';
+import { Layout, Header } from '../components';
 import { CircleFinal } from '../components/shapes';
 import { Facebook, Youtube, Instagram, Error } from '../components/icons';
 import { reducer, initialState, actions } from '../lib/reducer';
