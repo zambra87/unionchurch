@@ -15,7 +15,7 @@ import horaciopatty from '../public/images/horaciopatty.png';
 import sign from '../public/images/sign.png';
 import cover from '../public/images/cover.jpg';
 
-export default function Home({ dataServices, dataShepperdDeks }) {
+export default function Home() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
     email,
