@@ -56,52 +56,6 @@ export default function Home({ dataServices, dataShepperdDeks }) {
       dispatch({ type: actions.submitError, payload: e.response.data.error });
     }
   };
-  
-  const latestsShepperdDeks = dataShepperdDeks.items.map((posts, index) => {
-    const { title, resourceId, publishedAt } = posts.snippet;
-    const regexName = /\w[^:]*$/;
-    const name = regexName.exec(title);
-    if (
-      posts.status.privacyStatus !== 'private' &&
-      name[0].split(' ').includes('Deleted') === false
-    ) {
-      return (
-        <a
-          key={index}
-          href={`https://www.youtube.com/watch?v=${resourceId.videoId}`}
-          target="_blank"
-          rel="noreferrer"
-          className="flex-1 mb-8 flex bg-gray-50 hover:bg-gray-100 p-4 transition ease-in-out duration-200"
-        >
-          <Image
-            width={68}
-            height={68}
-            src={`https://img.youtube.com/vi/${resourceId.videoId}/0.jpg`}
-            alt=""
-            layout="fixed"
-            className="object-cover"
-            placeholder="blur"
-            blurDataURL={`data:image/svg+xml;base64,${toBase64(
-              shimmer(68, 68)
-            )}`}
-          />
-          <div className="ml-4">
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-800 mb-2 font-medium">
-              {name[0]}
-            </p>
-            <p className="text-base md:text-lg text-gray-600">
-              {new Date(publishedAt).toLocaleDateString('es-ES', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </p>
-          </div>
-        </a>
-      );
-    }
-  });
 
   return (
     <Layout title="Inicio">
