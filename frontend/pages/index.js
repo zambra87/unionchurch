@@ -56,51 +56,7 @@ export default function Home({ dataServices, dataShepperdDeks }) {
       dispatch({ type: actions.submitError, payload: e.response.data.error });
     }
   };
-
-  const latestsServices = dataServices.items.map(
-    ({ id, snippet = {}, status }) => {
-      const { title, thumbnails = {}, resourceId = {} } = snippet;
-      const { high } = thumbnails;
-
-      const regexDate = /\w[^-]*$/;
-      const regexTitle =
-        /(?:Servicio de Adoración(?::| Y)) ?"?([\w\sÁÉÍÓÚáéíóúÑñ]+)(?:"? pt\.(\d+))?/;
-      const name = regexTitle.exec(title);
-      const date = regexDate.exec(title);
-      if (
-        status.privacyStatus !== 'private' &&
-        title.split(' ').includes('Deleted') === false
-      ) {
-        return (
-          <a
-            key={id}
-            href={`https://www.youtube.com/watch?v=${resourceId.videoId}`}
-            target="_blank"
-            rel="noreferrer"
-            className="flex-1 mb-8 lg:mb-0"
-          >
-            <Image
-              width={high.width}
-              height={high.height}
-              src={high.url}
-              alt=""
-              placeholder="blur"
-              blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                shimmer(1280, 720)
-              )}`}
-            />
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-800 my-4 font-medium">
-              {name[0]}
-            </p>
-            <p className="text-base md:text-lg font-medium text-gray-700 mb-4">
-              {date[0]}
-            </p>
-          </a>
-        );
-      }
-    }
-  );
-
+  
   const latestsShepperdDeks = dataShepperdDeks.items.map((posts, index) => {
     const { title, resourceId, publishedAt } = posts.snippet;
     const regexName = /\w[^:]*$/;
