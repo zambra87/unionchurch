@@ -16,7 +16,7 @@ import sign from '../public/images/sign.png';
 import cover from '../public/images/cover.jpg';
 
 export default function Home({ dataServices, dataShepperdDeks }) {
-  console.log(dataServices.items);
+  console.log(dataServices, 'Data');
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
     email,
@@ -57,95 +57,143 @@ export default function Home({ dataServices, dataShepperdDeks }) {
     }
   };
 
-  const latestsServices = dataServices.items.map(
-    ({ id, snippet = {}, status }) => {
-      const { title, thumbnails = {}, resourceId = {} } = snippet;
-      const { high } = thumbnails;
+  const [data, setData] = React.useState(null);
+  const [isLoading2, setLoading] = React.useState(true);
+  const YOUTUBE_PLAYLIST_ITEMS_API =
+  'https://www.googleapis.com/youtube/v3/playlistItems';
+  React.useEffect(() => {
+    fetch(`${YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&part=status&maxResults=3&playlistId=${process.env.SHEPPERD_PLAYLIST_ID}&key=${process.env.YOUTUBE_KEY}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data)
+        setLoading(false)
+      })
+  }, [])
 
-      const regexDate = /\w[^-]*$/;
-      const regexTitle =
-        /(?:Servicio de Adoración(?::| Y)) ?"?([\w\sÁÉÍÓÚáéíóúÑñ]+)(?:"? pt\.(\d+))?/;
-      const name = regexTitle.exec(title);
-      const date = regexDate.exec(title);
-      if (
-        status.privacyStatus !== 'private' &&
-        title.split(' ').includes('Deleted') === false
-      ) {
-        return (
-          <a
-            key={id}
-            href={`https://www.youtube.com/watch?v=${resourceId.videoId}`}
-            target="_blank"
-            rel="noreferrer"
-            className="flex-1 mb-8 lg:mb-0"
-          >
-            <Image
-              width={high.width}
-              height={high.height}
-              src={high.url}
-              alt=""
-              placeholder="blur"
-              blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                shimmer(1280, 720)
-              )}`}
-            />
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-800 my-4 font-medium">
-              {name[0]}
-            </p>
-            <p className="text-base md:text-lg font-medium text-gray-700 mb-4">
-              {date[0]}
-            </p>
-          </a>
-        );
-      }
-    }
-  );
+  if (isLoading2) return <p>Loading...</p>
+  if (!data) return <p>No profile data</p>
+  console.log(data, 'Data');
 
-  const latestsShepperdDeks = dataShepperdDeks.items.map((posts, index) => {
-    const { title, resourceId, publishedAt } = posts.snippet;
-    const regexName = /\w[^:]*$/;
-    const name = regexName.exec(title);
-    if (
-      posts.status.privacyStatus !== 'private' &&
-      name[0].split(' ').includes('Deleted') === false
-    ) {
-      return (
-        <a
-          key={index}
-          href={`https://www.youtube.com/watch?v=${resourceId.videoId}`}
-          target="_blank"
-          rel="noreferrer"
-          className="flex-1 mb-8 flex bg-gray-50 hover:bg-gray-100 p-4 transition ease-in-out duration-200"
-        >
-          <Image
-            width={68}
-            height={68}
-            src={`https://img.youtube.com/vi/${resourceId.videoId}/0.jpg`}
-            alt=""
-            layout="fixed"
-            className="object-cover"
-            placeholder="blur"
-            blurDataURL={`data:image/svg+xml;base64,${toBase64(
-              shimmer(68, 68)
-            )}`}
-          />
-          <div className="ml-4">
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-800 mb-2 font-medium">
-              {name[0]}
-            </p>
-            <p className="text-base md:text-lg text-gray-600">
-              {new Date(publishedAt).toLocaleDateString('es-ES', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </p>
-          </div>
-        </a>
-      );
-    }
-  });
+
+// const videos = data.map(({ snippet, status }) => {
+//     const dashSplitRegex = /(.*?)-(.*)/;
+//     const colonSplitRegex = /(.*?):(.*)/;
+//     const quotesRegex = /"(.*?)"/g;
+
+//     const { title, thumbnails, resourceId } = snippet;
+//     const { high } = thumbnails;
+
+//     const dashSplitMatch = dashSplitRegex.exec(title);
+//     const colonSplitMatch = colonSplitRegex.exec(title);
+//     const videoName = title.match(quotesRegex)?.map((match) => match.replace(/"/g, ""));
+//     const videoDate = dashSplitMatch ? dashSplitMatch[2].trim() : "";
+//     const eventType = colonSplitMatch ? colonSplitMatch[1].trim() : "";
+
+//     if (status.privacyStatus !== "private" && title.split(" ").includes("Deleted") === false) {
+//       return {
+//         title: videoName ? videoName : "",
+//         date: videoDate ? videoDate : "",
+//         eventType: eventType ? eventType : "",
+//         videoId: resourceId.videoId,
+//         thumbnailSrc: high.url,
+//         thumbnailWidth: high.width,
+//         thumbnailHeight: high.height,
+//       };
+//     } else {
+//       return null;
+//     }
+//   })
+//   .filter((video) => video !== null);
+
+  // const latestsServices = dataServices.items.map(
+  //   ({ id, snippet = {}, status }) => {
+  //     const { title, thumbnails = {}, resourceId = {} } = snippet;
+  //     const { high } = thumbnails;
+
+  //     const regexDate = /\w[^-]*$/;
+  //     const regexTitle =
+  //       /(?:Servicio de Adoración(?::| Y)) ?"?([\w\sÁÉÍÓÚáéíóúÑñ]+)(?:"? pt\.(\d+))?/;
+  //     const name = regexTitle.exec(title);
+  //     const date = regexDate.exec(title);
+  //     if (
+  //       status.privacyStatus !== 'private' &&
+  //       title.split(' ').includes('Deleted') === false
+  //     ) {
+  //       return (
+  //         <a
+  //           key={id}
+  //           href={`https://www.youtube.com/watch?v=${resourceId.videoId}`}
+  //           target="_blank"
+  //           rel="noreferrer"
+  //           className="flex-1 mb-8 lg:mb-0"
+  //         >
+  //           <Image
+  //             width={high.width}
+  //             height={high.height}
+  //             src={high.url}
+  //             alt=""
+  //             placeholder="blur"
+  //             blurDataURL={`data:image/svg+xml;base64,${toBase64(
+  //               shimmer(1280, 720)
+  //             )}`}
+  //           />
+  //           <p className="text-lg sm:text-xl md:text-2xl text-gray-800 my-4 font-medium">
+  //             {name[0]}
+  //           </p>
+  //           <p className="text-base md:text-lg font-medium text-gray-700 mb-4">
+  //             {date[0]}
+  //           </p>
+  //         </a>
+  //       );
+  //     }
+  //   }
+  // );
+
+  // const latestsShepperdDeks = dataShepperdDeks.items.map((posts, index) => {
+  //   const { title, resourceId, publishedAt } = posts.snippet;
+  //   const regexName = /\w[^:]*$/;
+  //   const name = regexName.exec(title);
+  //   if (
+  //     posts.status.privacyStatus !== 'private' &&
+  //     name[0].split(' ').includes('Deleted') === false
+  //   ) {
+  //     return (
+  //       <a
+  //         key={index}
+  //         href={`https://www.youtube.com/watch?v=${resourceId.videoId}`}
+  //         target="_blank"
+  //         rel="noreferrer"
+  //         className="flex-1 mb-8 flex bg-gray-50 hover:bg-gray-100 p-4 transition ease-in-out duration-200"
+  //       >
+  //         <Image
+  //           width={68}
+  //           height={68}
+  //           src={`https://img.youtube.com/vi/${resourceId.videoId}/0.jpg`}
+  //           alt=""
+  //           layout="fixed"
+  //           className="object-cover"
+  //           placeholder="blur"
+  //           blurDataURL={`data:image/svg+xml;base64,${toBase64(
+  //             shimmer(68, 68)
+  //           )}`}
+  //         />
+  //         <div className="ml-4">
+  //           <p className="text-lg sm:text-xl md:text-2xl text-gray-800 mb-2 font-medium">
+  //             {name[0]}
+  //           </p>
+  //           <p className="text-base md:text-lg text-gray-600">
+  //             {new Date(publishedAt).toLocaleDateString('es-ES', {
+  //               weekday: 'long',
+  //               year: 'numeric',
+  //               month: 'long',
+  //               day: 'numeric',
+  //             })}
+  //           </p>
+  //         </div>
+  //       </a>
+  //     );
+  //   }
+  // });
 
   return (
     <Layout title="Inicio">
@@ -312,7 +360,7 @@ export default function Home({ dataServices, dataShepperdDeks }) {
             </a>
           </div>
           <div className="flex flex-wrap flex-col sm:flex-row justify-between text-left pb-16 md:space-x-8">
-            {latestsServices}
+            {/* {latestsServices} */}
           </div>
           <div className="flex items-center justify-between py-16">
             <p className="font-serif text-2xl md:text-3xl lg:text-4xl text-gray-800">
@@ -328,7 +376,7 @@ export default function Home({ dataServices, dataShepperdDeks }) {
             </a>
           </div>
           <div className="flex flex-wrap flex-col lg:flex-row justify-between text-left lg:space-x-8">
-            {latestsShepperdDeks}
+            {/* {latestsShepperdDeks} */}
           </div>
         </div>
       </div>
