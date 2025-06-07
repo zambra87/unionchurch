@@ -16,8 +16,9 @@ export function Cover() {
 
   if (isLive && videoId) {
     return (
-      <div className="w-full aspect-video">
-        <YouTubePlayer videoId={videoId} />
+      <div className="h-screen">
+        <Header />
+        <YouTubePlayer className="h-full" videoId={videoId} />
       </div>
     );
   }

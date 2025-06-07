@@ -28,7 +28,13 @@ export default async function ShortIdPage({
       redirect('/');
     }
 
-    redirect(data.redirect.destination);
+    // For external URLs, we need to use a client component
+    return (
+      <meta
+        httpEquiv="refresh"
+        content={`0;url=${data.redirect.destination}`}
+      />
+    );
   } catch (error) {
     console.error('Redirect error:', error);
     redirect('/');

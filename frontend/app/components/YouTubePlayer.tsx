@@ -13,14 +13,10 @@ export function YouTubePlayer({ videoId, className }: YouTubePlayerProps) {
     height: '100%',
     playerVars: {
       autoplay: 1,
-      modestbranding: 1,
+      controls: 0,
       rel: 0,
     },
   };
 
-  return (
-    <div className={className}>
-      <YouTube videoId={videoId} opts={opts} />
-    </div>
-  );
+  return <YouTube className={className} videoId={videoId} opts={opts} />;
 }
