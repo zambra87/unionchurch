@@ -1,7 +1,7 @@
 import '@/app/global.css';
 import { Metadata } from 'next';
 import { DM_Sans, DM_Serif_Display } from 'next/font/google';
-import { Footer } from './components/footer';
+import { Footer } from './components/Footer';
 
 export const metadata: Metadata = {
   title: {
