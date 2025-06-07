@@ -6,7 +6,7 @@ const YOUTUBE_API_BASE = 'https://www.googleapis.com/youtube/v3';
 
 export async function getLiveStreamStatus(): Promise<LiveStreamStatus> {
   try {
-    const res = await fetch('/api/youtube/live', {
+    const res = await fetch('/api/youtube', {
       next: {
         revalidate: 60, // Cache for 1 minute since live status changes frequently
       },
