@@ -39,7 +39,7 @@ export default async function Home() {
               significativas con otras personas, crecer y vivir la Palabra y
               extender el Reino de Dios con tu vida.
             </p>
-            <div>
+            <div className="flex justify-center sm:block">
               <Image
                 src={sign}
                 alt="Horacio & Patty's Sign"
