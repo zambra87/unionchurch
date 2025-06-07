@@ -49,12 +49,6 @@ export async function Header({ variant = 'white' }: HeaderProps) {
           <Link href="/dar" className={linkClass}>
             Dar
           </Link>
-          <Link href="/servir" className={linkClass}>
-            Servir
-          </Link>
-          <Link href="/crecer" className={linkClass}>
-            Crecer
-          </Link>
         </div>
       </nav>
     </div>
