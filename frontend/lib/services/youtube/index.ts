@@ -5,7 +5,7 @@ export type { VideoRender, Video } from './types';
 const YOUTUBE_API_BASE = 'https://www.googleapis.com/youtube/v3';
 
 export async function getLiveStreamStatus(): Promise<LiveStreamStatus> {
-  if (!process.env.YOUTUBE_KEY) {
+  if (!process.env.NEXT_PUBLIC_YOUTUBE_KEY) {
     throw new Error('YouTube API key is not configured');
   }
 
@@ -14,10 +14,10 @@ export async function getLiveStreamStatus(): Promise<LiveStreamStatus> {
       `${YOUTUBE_API_BASE}/search?` +
         new URLSearchParams({
           part: 'snippet',
-          channelId: process.env.YOUTUBE_CHANNEL_ID || '',
+          channelId: process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ID || '',
           type: 'video',
           eventType: 'live',
-          key: process.env.YOUTUBE_KEY,
+          key: process.env.NEXT_PUBLIC_YOUTUBE_KEY,
         }),
       {
         next: {
