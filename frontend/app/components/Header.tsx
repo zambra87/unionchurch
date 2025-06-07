@@ -1,17 +1,15 @@
+'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getLiveStreamStatus } from '@/lib/services/youtube';
+import { useLive } from '@/app/contexts/LiveContext';
 import { Sensor } from './icons';
 
 type HeaderProps = {
   variant?: 'white' | 'black';
 };
 
-export async function Header({ variant = 'white' }: HeaderProps) {
-  const { isLive } =
-    process.env.NODE_ENV === 'development'
-      ? { isLive: false }
-      : await getLiveStreamStatus();
+export function Header({ variant = 'white' }: HeaderProps) {
+  const { isLive } = useLive();
 
   const headerClass =
     variant === 'white'
