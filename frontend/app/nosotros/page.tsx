@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { Adn, Vision } from '../components/shapes';
 import { Heart } from '../components/icons';
 import { Header } from '../components';
@@ -69,12 +68,14 @@ export default async function About() {
                 personas a conocer, amar y compartir a Jesús.
               </p>
             </div>
-            <Link
-              href="recursos/confesion.pdf"
+            <a
+              href="/recursos/confesion.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="tracking-wider uppercase text-sm inline px-8 py-3 font-bold bg-black hover:bg-gray-900 text-white transition duration-150 ease-in-out"
             >
               Confesión y valores
-            </Link>
+            </a>
           </div>
           <div className="w-full md:w-1/2">
             <Image
