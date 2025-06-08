@@ -77,9 +77,9 @@ function CoverContent({ isLive, videoId, isLoading }: CoverContentProps) {
 export function Cover() {
   const { isLive, videoId, isLoading } = useLive();
 
-  const containerClass = 
-    isLive || isLoading || videoId 
-      ? 'h-auto pt-40 pb-16 lg:h-screen w-full flex justify-center items-center bg-gray' 
+  const containerClass =
+    isLive || isLoading || videoId
+      ? 'h-auto pt-40 pb-16 lg:h-screen w-full flex justify-center items-center bg-gray'
       : 'h-screen';
 
   return (
