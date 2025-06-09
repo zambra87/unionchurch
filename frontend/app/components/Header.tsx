@@ -47,6 +47,9 @@ export function Header({ variant = 'white' }: HeaderProps) {
           <Link href="/dar" className={linkClass}>
             Dar
           </Link>
+          <Link href="/servir" className={linkClass}>
+            Servir
+          </Link>
         </div>
       </nav>
     </div>
