@@ -12,12 +12,12 @@ export async function GET() {
 
   try {
     const res = await fetch(
-      `${YOUTUBE_API_BASE}/search?` +
+      `${YOUTUBE_API_BASE}/videos?` +
         new URLSearchParams({
-          part: 'snippet',
+          part: 'snippet,status',
           channelId: process.env.YOUTUBE_CHANNEL_ID || '',
+          broadcastStatus: 'active',
           type: 'video',
-          eventType: 'live',
           key: process.env.YOUTUBE_KEY,
         })
     );
@@ -43,7 +43,7 @@ export async function GET() {
     return NextResponse.json({
       isLive: true,
       stream: {
-        id: liveStream.id.videoId,
+        id: liveStream.id,
         title: liveStream.snippet.title,
         description: liveStream.snippet.description,
         publishedAt: liveStream.snippet.publishedAt,
