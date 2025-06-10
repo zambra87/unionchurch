@@ -9,8 +9,8 @@ export const metadata: Metadata = {
     template: '%s | Union Church',
     default: 'Union Church',
   },
-  description: 'The official Next.js Learn Dashboard built with App Router.',
-  metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
+  description: 'Union Church, una Iglesia Viña en Viña del Mar.',
+  metadataBase: new URL('https://unionchurch.cl'),
 };
 
 const dmSerifDisplay = DM_Serif_Display({

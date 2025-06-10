@@ -14,7 +14,7 @@ export function Header({ variant = 'white' }: HeaderProps) {
   const headerClass =
     variant === 'white'
       ? 'bg-gradient-to-b from-gray-900 filter to-transparent w-full py-4 md:py-10 absolute top-0 '
-      : 'bg-pink w-full py-10';
+      : 'bg-pink w-full py-4 md:py-10';
 
   const linkClass =
     variant === 'white'
