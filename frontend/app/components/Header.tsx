@@ -10,7 +10,7 @@ type HeaderProps = {
 export async function Header({ variant = 'white' }: HeaderProps) {
   const isDevelopment = process.env.NODE_ENV === 'development';
 
-  let isLive: boolean;
+  let isLive = false;
 
   if (!isDevelopment) {
     const { isLive: live } = await getLiveStreamStatus();
