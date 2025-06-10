@@ -1,14 +1,13 @@
-import * as React from "react"
-import * as AccordionPrimitive from "@radix-ui/react-accordion"
+import * as React from 'react';
+import * as AccordionPrimitive from '@radix-ui/react-accordion';
 
 function Accordion({
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Root>) {
-  return <AccordionPrimitive.Root data-slot="accordion" {...props} />
+  return <AccordionPrimitive.Root data-slot="accordion" {...props} />;
 }
 
 function AccordionItem({
-  className,
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Item>) {
   return (
@@ -17,11 +16,10 @@ function AccordionItem({
       className="border-b last:border-b-0 border-gray-300"
       {...props}
     />
-  )
+  );
 }
 
 function AccordionTrigger({
-  className,
   children,
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Trigger>) {
@@ -34,21 +32,19 @@ function AccordionTrigger({
       >
         {children}
         <svg
-        className="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 h-6 w-6"
-        focusable="false"
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-      >
-        <path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
-      </svg>
-
+          className="text-muted-foreground pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 h-6 w-6"
+          focusable="false"
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+        >
+          <path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path>
+        </svg>
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
-  )
+  );
 }
 
 function AccordionContent({
-  className,
   children,
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Content>) {
@@ -60,7 +56,7 @@ function AccordionContent({
     >
       <div className="pt-0 pb-4">{children}</div>
     </AccordionPrimitive.Content>
-  )
+  );
 }
 
-export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }
+export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };
