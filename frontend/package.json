@@ -44,7 +44,7 @@
     "eslint-plugin-prettier": "^5.4.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "mailchimp_marketing": "file:./@types/@mailchimp/mailchimp_marketing",
+    "mailchimp_marketing": "link:@types/@mailchimp/mailchimp_marketing",
     "node-fetch": "3",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",

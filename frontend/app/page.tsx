@@ -78,7 +78,7 @@ export default async function Home() {
             placeholder="blur"
           />
         </a>
-        
+
         <Image
           alt=""
           width={160}
@@ -104,10 +104,6 @@ export default async function Home() {
           className="filter grayscale hover:grayscale-0"
           placeholder="blur"
         />
-
-       
-
-
       </div>
       <div className="px-8 sm:px-0 bg-pink-light" style={{ zIndex: '-1' }}>
         <div className="relative">
