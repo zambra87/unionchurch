@@ -1,33 +1,58 @@
-'use client';
-
-import { useLive } from '@/app/contexts/LiveContext';
 import { YouTubePlayer } from './YouTubePlayer';
 import Image from 'next/image';
 import cover from '@/public/images/cover.jpg';
 import { Header } from './Header';
 import { Facebook, Instagram, Youtube } from './icons';
+import { getLiveStreamStatus } from '@/lib/services/youtube';
 
-type CoverContentProps = {
-  isLive: boolean;
-  videoId: string | null;
-  isLoading: boolean;
-};
+async function CoverContent() {
+  const isDevelopment = process.env.NODE_ENV === 'development';
 
-function CoverContent({ isLive, videoId, isLoading }: CoverContentProps) {
-  if (isLoading) {
+  let isLive: boolean;
+  let videoId: string | null;
+  let title: string;
+  let date: string;
+
+  if (isDevelopment) {
     return (
-      <div className="container mx-auto aspect-video bg-gray-200 animate-pulse rounded-2xl flex justify-center items-center">
-        <p className="text-center text-2xl font-bold">Cargando...</p>
+      <div className="container mx-auto px-4 md:px-0">
+        <YouTubePlayer
+          className="h-full w-full aspect-video overflow-hidden rounded-2xl mb-4"
+          videoId="dQw4w9WgXcQ"
+        />
+        <p className="text-lg sm:text-xl md:text-2xl text-white my-2 font-medium truncate">
+          Nombre del servicio
+        </p>
+        <p className="text-base md:text-lg font-medium text-gray-300 truncate">
+          Fecha
+        </p>
       </div>
     );
+  } else {
+    const { isLive: live, stream } = await getLiveStreamStatus();
+    isLive = live;
+    videoId = stream?.id || null;
+    title = stream?.title || '';
+    date = stream?.publishedAt || '';
   }
+
   if (isLive && videoId) {
     return (
-      <div className="container mx-auto px-8 md:px-0">
+      <div className="container mx-auto px-4 md:px-0">
         <YouTubePlayer
-          className="h-full w-full aspect-video overflow-hidden rounded-2xl"
+          className="h-full w-full aspect-video overflow-hidden rounded-2xl mb-4"
           videoId={videoId}
         />
+        <p className="text-lg sm:text-xl md:text-2xl text-white my-2 font-medium truncate">
+          {title}
+        </p>
+        <p className="text-base md:text-lg font-medium text-gray-300">
+          {new Date(date).toLocaleDateString('es-CL', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+          })}
+        </p>
       </div>
     );
   }
@@ -75,17 +100,10 @@ function CoverContent({ isLive, videoId, isLoading }: CoverContentProps) {
 }
 
 export function Cover() {
-  const { isLive, videoId, isLoading } = useLive();
-
-  const containerClass =
-    isLive || isLoading || videoId
-      ? 'h-auto pt-40 pb-16 lg:h-screen w-full flex justify-center items-center bg-gray'
-      : 'h-screen';
-
   return (
-    <div className={containerClass}>
+    <div className="h-auto pt-44 pb-8 lg:h-screen w-full flex justify-center items-center bg-gray">
       <Header />
-      <CoverContent isLive={isLive} videoId={videoId} isLoading={isLoading} />
+      <CoverContent />
     </div>
   );
 }

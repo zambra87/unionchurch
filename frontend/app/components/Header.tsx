@@ -1,16 +1,21 @@
-'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useLive } from '@/app/contexts/LiveContext';
 import { Sensor } from './icons';
+import { getLiveStreamStatus } from '@/lib/services/youtube';
 
 type HeaderProps = {
   variant?: 'white' | 'black';
 };
 
-export function Header({ variant = 'white' }: HeaderProps) {
-  const { isLive } = useLive();
+export async function Header({ variant = 'white' }: HeaderProps) {
+  const isDevelopment = process.env.NODE_ENV === 'development';
 
+  let isLive: boolean;
+
+  if (!isDevelopment) {
+    const { isLive: live } = await getLiveStreamStatus();
+    isLive = live;
+  }
   const headerClass =
     variant === 'white'
       ? 'bg-gradient-to-b from-gray-900 filter to-transparent w-full py-4 md:py-10 absolute top-0 '
@@ -30,7 +35,7 @@ export function Header({ variant = 'white' }: HeaderProps) {
     <div className={headerClass} style={{ zIndex: 1 }}>
       <nav className="container mx-auto md:px-0 md:flex flex-row items-center justify-between">
         <div
-          className={`px-4 flex items-center gap-4 basis-full md:basis-auto grow border-b-1 ${borderColor} md:border-b-0 pb-4 md:pb-0 md:border-none`}
+          className={`px-4 flex items-center gap-4 basis-full md:basis-auto grow border-b-1 ${borderColor} md:border-b-0 pb-4 md:pb-0 md:border-none justify-between md:justify-normal`}
         >
           <Link href="/">
             <Image
@@ -47,7 +52,9 @@ export function Header({ variant = 'white' }: HeaderProps) {
               className="flex bg-red-500 items-center gap-2 rounded-full px-4 py-2 text-white hover:bg-red-600 transition-colors duration-300"
             >
               <Sensor className="w-6 h-6" />
-              <span>VIVO</span>
+              <span className="tracking-wider uppercase text-sm font-bold">
+                VIVO
+              </span>
             </a>
           )}
         </div>
