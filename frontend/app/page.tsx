@@ -3,10 +3,10 @@ import { LatestShepperDesk, LatestServices } from './components/';
 import horaciopatty from '@/public/images/horaciopatty.png';
 import sign from '@/public/images/sign.png';
 import mujeres from '@/public/images/ministries/1.png';
-import hombres from '@/public/images/ministries/2.png';
-import dorados from '@/public/images/ministries/3.png';
-import unionX from '@/public/images/ministries/4.png';
-import unionKids from '@/public/images/ministries/5.png';
+import unionKids from '@/public/images/ministries/2.png';
+import unionX from '@/public/images/ministries/3.png';
+import hombres from '@/public/images/ministries/4.png';
+import dorados from '@/public/images/ministries/5.png';
 import { CircleFinal } from '@/app/components/shapes/CircleFinal';
 import Newsletter from './components/Newsletter';
 import Link from 'next/link';
@@ -75,6 +75,7 @@ export default async function Home() {
           className="filter grayscale hover:grayscale-0"
           placeholder="blur"
         />
+
         <Image
           alt=""
           width={160}
@@ -83,14 +84,18 @@ export default async function Home() {
           className="filter grayscale hover:grayscale-0"
           placeholder="blur"
         />
-        <Image
-          alt=""
-          width={160}
-          height={160}
-          src={unionX}
-          className="filter grayscale hover:grayscale-0"
-          placeholder="blur"
-        />
+
+        <a href="https://www.atom.bio/unionx" target="_blank">
+          <Image
+            alt=""
+            width={160}
+            height={160}
+            src={unionX}
+            className="filter grayscale hover:grayscale-0"
+            placeholder="blur"
+          />
+        </a>
+
         <Image
           alt=""
           width={160}
