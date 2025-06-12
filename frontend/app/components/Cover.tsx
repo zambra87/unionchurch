@@ -15,7 +15,7 @@ async function CoverContent() {
 
   if (isDevelopment) {
     return (
-      <div className="container mx-auto px-4 md:px-0">
+      <div className="container mx-auto px-4 md:px-0 pt-36 pb-8">
         <YouTubePlayer
           className="h-full w-full aspect-video overflow-hidden rounded-2xl mb-4"
           videoId="dQw4w9WgXcQ"
@@ -38,7 +38,7 @@ async function CoverContent() {
 
   if (isLive && videoId) {
     return (
-      <div className="container mx-auto px-4 md:px-0">
+      <div className="container mx-auto px-4 md:px-0 pt-36 pb-8">
         <YouTubePlayer
           className="h-full w-full aspect-video overflow-hidden rounded-2xl mb-4"
           videoId={videoId}
@@ -58,7 +58,7 @@ async function CoverContent() {
   }
 
   return (
-    <>
+    <div className="h-screen w-full">
       <Image
         className="absolute object-cover w-full h-full"
         alt="Cover"
@@ -95,13 +95,13 @@ async function CoverContent() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
 export function Cover() {
   return (
-    <div className="h-auto pt-44 pb-8 lg:h-screen w-full flex justify-center items-center bg-gray">
+    <div className="flex justify-center items-center bg-gray">
       <Header />
       <CoverContent />
     </div>

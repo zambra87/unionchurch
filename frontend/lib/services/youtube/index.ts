@@ -5,19 +5,57 @@ export type { VideoRender, Video } from './types';
 const YOUTUBE_API_BASE = 'https://www.googleapis.com/youtube/v3';
 
 export async function getLiveStreamStatus(): Promise<LiveStreamStatus> {
+  if (!process.env.YOUTUBE_KEY) {
+    throw new Error('YouTube API key is not configured');
+  }
+
+  if (!process.env.YOUTUBE_CHANNEL_ID) {
+    throw new Error('YouTube channel ID is not configured');
+  }
+
   try {
-    const res = await fetch('/api/youtube', {
-      next: {
-        revalidate: 60, // Cache for 1 minute since live status changes frequently
-      },
-    });
+    const res = await fetch(
+      `${YOUTUBE_API_BASE}/videos?` +
+        new URLSearchParams({
+          part: 'snippet,status',
+          channelId: process.env.YOUTUBE_CHANNEL_ID,
+          broadcastStatus: 'active',
+          type: 'video',
+          key: process.env.YOUTUBE_KEY,
+        }),
+      {
+        next: {
+          revalidate: 60,
+        },
+      }
+    );
 
     if (!res.ok) {
       const error = await res.json();
-      throw new Error(error.error || 'Failed to check live status');
+      throw new Error(error.error?.message || 'Failed to check live status');
     }
 
-    return res.json();
+    const data = await res.json();
+
+    if (data.items.length === 0) {
+      return {
+        isLive: false,
+        stream: null,
+      };
+    }
+
+    const liveStream = data.items[0];
+    return {
+      isLive: true,
+      stream: {
+        id: liveStream.id,
+        title: liveStream.snippet.title,
+        description: liveStream.snippet.description,
+        publishedAt: liveStream.snippet.publishedAt,
+        thumbnailUrl: liveStream.snippet.thumbnails.high.url,
+        channelTitle: liveStream.snippet.channelTitle,
+      },
+    };
   } catch (error) {
     console.error('Error checking live status:', error);
     throw error;
