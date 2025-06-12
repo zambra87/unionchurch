@@ -2,7 +2,6 @@ import '@/app/global.css';
 import { Metadata } from 'next';
 import { DM_Sans, DM_Serif_Display } from 'next/font/google';
 import { Footer } from './components/Footer';
-import { LiveProvider } from './contexts/LiveContext';
 
 export const metadata: Metadata = {
   title: {
@@ -33,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${dmSerifDisplay.variable} ${dmSans.variable}`}>
-        <LiveProvider>{children}</LiveProvider>
+        {children}
         <Footer />
       </body>
     </html>
