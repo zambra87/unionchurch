@@ -6,7 +6,8 @@ import { Facebook, Instagram, Youtube } from './icons';
 import { getLiveStreamStatus } from '@/lib/services/youtube';
 
 async function CoverContent() {
-  const isDevelopment = process.env.NODE_ENV === 'development';
+  // const isDevelopment = process.env.NODE_ENV === 'development';
+  const isDevelopment = false;
 
   let isLive: boolean;
   let videoId: string | null;

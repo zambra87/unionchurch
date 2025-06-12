@@ -22,6 +22,7 @@ export async function getLiveStreamStatus(): Promise<LiveStreamStatus> {
           broadcastStatus: 'active',
           type: 'video',
           key: process.env.YOUTUBE_KEY,
+          myRating: 'none',
         }),
       {
         next: {
