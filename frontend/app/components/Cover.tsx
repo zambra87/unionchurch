@@ -9,11 +9,14 @@ async function CoverContent() {
   const isDevelopment = process.env.NODE_ENV === 'development';
 
   let isLive: boolean;
-  let videoId: string | null;
+  let video: {
+    videoId: string;
+    kind: string;
+  } | null;
   let title: string;
   let date: string;
 
-  if (isDevelopment) {
+  if (!isDevelopment) {
     return (
       <div className="container mx-auto px-4 md:px-0 pt-36 pb-8">
         <YouTubePlayer
@@ -31,17 +34,19 @@ async function CoverContent() {
   } else {
     const { isLive: live, stream } = await getLiveStreamStatus();
     isLive = live;
-    videoId = stream?.id || null;
+    video = stream?.id || null;
     title = stream?.title || '';
     date = stream?.publishedAt || '';
   }
 
-  if (isLive && videoId) {
+  console.log(isLive, video, title, date, 'isLive, videoId, title, date');
+
+  if (isLive && video) {
     return (
       <div className="container mx-auto px-4 md:px-0 pt-36 pb-8">
         <YouTubePlayer
           className="h-full w-full aspect-video overflow-hidden rounded-2xl mb-4"
-          videoId={videoId}
+          videoId={video.videoId}
         />
         <p className="text-lg sm:text-xl md:text-2xl text-white my-2 font-medium truncate">
           {title}

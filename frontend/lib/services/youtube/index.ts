@@ -15,18 +15,17 @@ export async function getLiveStreamStatus(): Promise<LiveStreamStatus> {
 
   try {
     const res = await fetch(
-      `${YOUTUBE_API_BASE}/videos?` +
+      `${YOUTUBE_API_BASE}/search?` +
         new URLSearchParams({
-          part: 'snippet,status',
+          part: 'snippet',
           channelId: process.env.YOUTUBE_CHANNEL_ID,
-          broadcastStatus: 'active',
           type: 'video',
+          eventType: 'live',
           key: process.env.YOUTUBE_KEY,
-          myRating: 'none',
         }),
       {
         next: {
-          revalidate: 60,
+          revalidate: 30,
         },
       }
     );
@@ -37,6 +36,7 @@ export async function getLiveStreamStatus(): Promise<LiveStreamStatus> {
     }
 
     const data = await res.json();
+    console.log('YouTube API Response:', data);
 
     if (data.items.length === 0) {
       return {
@@ -46,6 +46,7 @@ export async function getLiveStreamStatus(): Promise<LiveStreamStatus> {
     }
 
     const liveStream = data.items[0];
+
     return {
       isLive: true,
       stream: {
