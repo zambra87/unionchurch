@@ -16,7 +16,7 @@ async function CoverContent() {
   let title: string;
   let date: string;
 
-  if (!isDevelopment) {
+  if (isDevelopment) {
     return (
       <div className="container mx-auto px-4 md:px-0 pt-36 pb-8">
         <YouTubePlayer
