@@ -21,7 +21,7 @@ async function CoverContent() {
       <div className="container mx-auto px-4 md:px-0 pt-36 pb-8">
         <YouTubePlayer
           className="h-full w-full aspect-video overflow-hidden rounded-2xl mb-4"
-          videoId="dQw4w9WgXcQ"
+          videoId="sQmOSYdFkug"
         />
         <p className="text-lg sm:text-xl md:text-2xl text-white my-2 font-medium truncate">
           Nombre del servicio
