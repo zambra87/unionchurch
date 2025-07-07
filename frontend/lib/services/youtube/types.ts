@@ -31,11 +31,8 @@ export type VideoRender = {
 export type LiveStreamStatus = {
   isLive: boolean;
   stream: {
-    id: { videoId: string; kind: string };
+    video: { videoId: string; kind: string };
     title: string;
-    description: string;
-    publishedAt: string;
-    thumbnailUrl: string;
-    channelTitle: string;
+    publishTime: string;
   } | null;
 };

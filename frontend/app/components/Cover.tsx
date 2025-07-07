@@ -16,7 +16,7 @@ async function CoverContent() {
   let title: string;
   let date: string;
 
-  if (isDevelopment) {
+  if (!isDevelopment) {
     return (
       <div className="container mx-auto px-4 md:px-0 pt-36 pb-8">
         <YouTubePlayer
@@ -34,12 +34,10 @@ async function CoverContent() {
   } else {
     const { isLive: live, stream } = await getLiveStreamStatus();
     isLive = live;
-    video = stream?.id || null;
+    video = stream?.video || null;
     title = stream?.title || '';
-    date = stream?.publishedAt || '';
+    date = stream?.publishTime || '';
   }
-
-  console.log(isLive, video, title, date, 'isLive, videoId, title, date');
 
   if (isLive && video) {
     return (

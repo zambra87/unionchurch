@@ -36,7 +36,6 @@ export async function getLiveStreamStatus(): Promise<LiveStreamStatus> {
     }
 
     const data = await res.json();
-    console.log('YouTube API Response:', data);
 
     if (data.items.length === 0) {
       return {
@@ -45,17 +44,17 @@ export async function getLiveStreamStatus(): Promise<LiveStreamStatus> {
       };
     }
 
-    const liveStream = data.items[0];
+    const liveStream = data.items[0].snippet;
 
     return {
       isLive: true,
       stream: {
-        id: liveStream.id,
-        title: liveStream.snippet.title,
-        description: liveStream.snippet.description,
-        publishedAt: liveStream.snippet.publishedAt,
-        thumbnailUrl: liveStream.snippet.thumbnails.high.url,
-        channelTitle: liveStream.snippet.channelTitle,
+        video: {
+          videoId: liveStream.id.videoId,
+          kind: liveStream.id.kind,
+        },
+        title: liveStream.title,
+        publishTime: liveStream.publishTime,
       },
     };
   } catch (error) {

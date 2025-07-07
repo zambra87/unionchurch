@@ -1,3 +1,4 @@
+// app/[url]/page.tsx
 import { initializeApollo } from '@/lib/apolloClient';
 import { gql } from '@apollo/client';
 import { redirect } from 'next/navigation';
@@ -9,6 +10,10 @@ const GET_DESTINATION = gql`
     }
   }
 `;
+
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function ShortIdPage({
   params,
@@ -22,13 +27,13 @@ export default async function ShortIdPage({
     const { data } = await apolloClient.query({
       query: GET_DESTINATION,
       variables: { source },
+      fetchPolicy: 'no-cache', // Disable Apollo caching
     });
 
     if (!data?.redirect?.destination) {
       redirect('/');
     }
 
-    // For external URLs, we need to use a client component
     return (
       <meta
         httpEquiv="refresh"
