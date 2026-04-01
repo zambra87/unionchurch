@@ -59,6 +59,26 @@ export default async function Home() {
         Intégrate a nuestros grupos de crecimiento
       </p>
       <div className="flex justify-center flex-wrap space-x-8">
+         <Image
+          alt=""
+          width={160}
+          height={160}
+          src={unionKids}
+          className="filter grayscale hover:grayscale-0"
+          placeholder="blur"
+        />
+
+         <a href="https://www.unionchurch.cl/unionx" target="_blank">
+          <Image
+            alt=""
+            width={160}
+            height={160}
+            src={unionX}
+            className="filter grayscale hover:grayscale-0"
+            placeholder="blur"
+          />
+        </a>
+
         <Image
           alt=""
           width={160}
@@ -81,26 +101,6 @@ export default async function Home() {
           width={160}
           height={160}
           src={dorados}
-          className="filter grayscale hover:grayscale-0"
-          placeholder="blur"
-        />
-
-        <a href="https://www.atom.bio/unionx" target="_blank">
-          <Image
-            alt=""
-            width={160}
-            height={160}
-            src={unionX}
-            className="filter grayscale hover:grayscale-0"
-            placeholder="blur"
-          />
-        </a>
-
-        <Image
-          alt=""
-          width={160}
-          height={160}
-          src={unionKids}
           className="filter grayscale hover:grayscale-0"
           placeholder="blur"
         />
