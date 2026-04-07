@@ -73,7 +73,7 @@ async function CoverContent() {
           <p className="text-center text-white font-sans text-5xl mt-40 mb-2 md:text-6xl lg:text-6xl">
             Union Church
           </p>
-           <p className="text-center text-white font-serif text-3xl mb-20 md:text-6xl lg:text-2xl">
+          <p className="text-center text-white font-serif text-3xl mb-20 md:text-6xl lg:text-2xl">
             Bienvenido a Casa
           </p>
           <div className="flex justify-center">
