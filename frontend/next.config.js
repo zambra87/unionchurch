@@ -9,7 +9,7 @@ const { withSentryConfig } = require('@sentry/nextjs');
 
 const moduleExports = {
   reactStrictMode: true,
-    eslint: {
+  eslint: {
     ignoreDuringBuilds: true,
   },
 
