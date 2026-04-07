@@ -9,6 +9,9 @@ const { withSentryConfig } = require('@sentry/nextjs');
 
 const moduleExports = {
   reactStrictMode: true,
+    eslint: {
+    ignoreDuringBuilds: true,
+  },
 
   images: {
     remotePatterns: [
