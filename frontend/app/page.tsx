@@ -12,6 +12,7 @@ import Newsletter from './components/Newsletter';
 import Link from 'next/link';
 import { Cover } from './components/Cover';
 
+export const dynamic = 'force-dynamic';
 export default async function Home() {
   return (
     <>
