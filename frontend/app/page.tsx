@@ -145,7 +145,7 @@ export default async function Home() {
             </a>
           </div>
           <div className="flex flex-wrap flex-col sm:flex-row justify-between text-left pb-16 md:space-x-8">
-            <LatestServices />
+            {/* <LatestServices /> */}
           </div>
           <div className="flex items-center justify-between py-16">
             <p className="font-serif text-2xl md:text-3xl lg:text-4xl text-gray-800">
@@ -160,7 +160,7 @@ export default async function Home() {
             </Link>
           </div>
           <div className="flex flex-wrap flex-col lg:flex-row justify-between text-left lg:space-x-8">
-            <LatestShepperDesk />
+            {/* <LatestShepperDesk /> */}
           </div>
         </div>
       </div>
